@@ -7,6 +7,9 @@ The source code can be viewed in the src folder. the application is still raw an
   
 ### Screenshot
  ![WeatherApp](./src/img/homepage.png)
- 
+
+### ToDo list: 
+Trello: https://trello.com/b/ZJuJ1Rws/weather-app
+
 ### Author 
   (C) 2020 Sergeev Danil | telegram: @triplicates
