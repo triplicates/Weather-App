@@ -1,0 +1,143 @@
+@import "./fonts.css";
+@import "./normalize.css";
+@import "./variables.scss";
+body{
+    font-family: 'Quicksand', sans-serif;
+    color: $firstColor;
+}
+
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: $width;
+    min-height: 400px;
+}
+.section-logo{
+    margin-bottom: 60px;
+    &__title{
+        font-size: 41px;
+    }
+    &__subtitle{
+        text-align: right;
+        span{
+            font-weight: bold;
+            color: $secondColor;
+        }
+    }
+}
+.section-output{
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    width: 600px;
+    height: 42px;
+    border: 1px solid rgba(1,1,1,.2);
+    border-radius: 10px;
+    transition: all .4s;
+    &__input{
+        position: relative;
+        flex-basis: 90%;
+        height: 42px;
+        input{
+            outline: none;
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            width: 100%;
+            padding-left: 12px;
+        }
+    }
+    &__btn{
+        outline: none;
+        color: $secondColor;
+        font-weight: bold;
+        flex-basis: 10%;
+        background: none;
+        border: none;
+        border-left: 1px solid rgba(1,1,1,.2);
+        height: 26px;
+        &:hover{
+            cursor: pointer;
+            color: rgba(234, 110, 75,.8);
+        }
+    }
+}
+.wrapper{
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 400px;
+    span{
+        font-weight: bold;
+        color: $secondColor;
+    }
+    &__title{
+        font-size: 24px;
+        color: #707070;
+    }
+    &__temp{
+        margin: 20px 0;
+        font-size: 32px;
+    }
+    &__information{
+        width: 400px;
+        border-top: 1px solid rgba(1,1,1,.2);
+    }
+    .inf{
+        margin: 20px 0;
+    }
+}
+.version{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.animation_hide{
+    animation: hide 1s forwards;
+}
+.animation_scroll__left{
+    animation: animation_scroll__left 1s forwards;
+}
+.animation_show__up{
+    animation: animation_show__up 1s forwards;
+}
+@keyframes animation_scroll__left{
+    0%{
+        opacity: 1;
+        margin-left: 0;
+    }
+    100%{
+        opacity: 0;
+        margin-left: -100vh;
+    }
+}
+@keyframes animation_show__up{
+    0%{
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes hide{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+
+
