@@ -12,4 +12,4 @@ The source code can be viewed in the src folder. the application is still raw an
 Trello: https://trello.com/b/ZJuJ1Rws/weather-app
 
 ### Author 
-  (C) 2020 Sergeev Danil | telegram: @triplicates
+  (C) 2020 Sergeev Danil | telegram: @triplicatesouls
