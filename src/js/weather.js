@@ -1,15 +1,20 @@
-$weather = function (city, api) {
-    let promise = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`)
+const api = require("./API_KEY");
 
-    function getData(promise) {
-        let data = promise
+class Weather {
+    getData(city) {
+        let promise = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`)
+        return promise
             .then(data => {
-                return data.json()
+                return data.json();
             })
-        return data
+            .then(data => {
+                let { name, main, cod } = data
+                return { name, main, cod }
+            })
     }
-    return getData(promise)
 }
+let weather = new Weather();
 
-module.exports = $weather;
+
+module.exports = weather;
 

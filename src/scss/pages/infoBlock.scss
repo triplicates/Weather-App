@@ -1,0 +1,37 @@
+@import "./variables.scss";
+
+.infoPage {
+  font-family: "Quicksand", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: $width;
+  height: $height;
+  span {
+    font-weight: bold;
+    color: $secondColor;
+  }
+  &__title {
+    font-size: 24px;
+    color: #707070;
+  }
+  &__temp {
+    margin: 20px 0;
+    font-size: 32px;
+  }
+  &__information {
+    width: 400px;
+    border-top: 1px solid rgba(1, 1, 1, 0.2);
+  }
+  &__section {
+    margin: 20px 0;
+  }
+  &__footer {
+    text-align: center;
+    line-height: 32px;
+    background: #fff;
+    width: 180px;
+    height: 36px;
+    border-radius: 10px;
+  }
+}

@@ -1,69 +1,75 @@
-const weather = require("./weather");
-import api from "./API_KEY";
+const weather = require('./weather');
+const page = require("./controlPages");
+const version = require("./analytics");
 
 
-function createWrapper(name, temp, humidity, temp_min, temp_max, ) {
-    let wrapper = document.createElement('div');
-    let container = document.querySelector('.container');
-    wrapper.classList.add('wrapper', 'animation_show__up');
-    wrapper.insertAdjacentHTML('afterbegin',
-        `
-            <div class="wrapper__title">Temperature</div>
-            <div class="wrapper__temp"><span>${toDeg(temp)}</span>&deg</div>
-            <div class="wrapper__information">
-                <div class="wrapper__hum inf">Humidity: <span>${humidity}%</span></div>
-                <div class="wrapper__min inf">Min: <span>${toDeg(temp_min)}</span>&deg</div>
-                <div class="wrapper__max inf">Max: <span>${toDeg(temp_max)}</span>&deg</div>
-            </div>
-            <footer class="wrapper__footer">Current city: ${name}</footer>
-        `)
-    return setTimeout(() => { container.appendChild(wrapper) }, 800)
-}
-function animate() {
-    let container = document.querySelector('.container');
-    let output = document.querySelector('.section-output');
-    let logo = document.querySelector('.section-logo');
-    output.classList.add('animation_scroll__left');
-    logo.classList.add('animation_hide');
-    setTimeout(() => {
-        output.remove();
-        logo.remove()
-        container.style.justifyContent = "center";
-    }, 800)
-}
-function outputData() {
-    let city = document.querySelector('.section-output input').value;
-    weather(city, api)
-        .then(data => {
-            let { name } = data;
-            let { temp, temp_min, temp_max, humidity } = data.main;
-            animate();
-            createWrapper(name, temp, humidity, temp_min, temp_max)
-        })
-        .catch(error => {
-            let output = document.querySelector('.section-output');
-            let input = document.querySelector('.section-output input');
-            output.style.border = "1px solid rgba(234, 110, 75,1)";
-            input.setAttribute('placeholder', 'Not entered the correct city name!!');
-        })
-}
-function toDeg(value) {
-    return Math.round(value - 273);
-}
-function controlBtn() {
-    let btn = document.querySelector('.section-output__btn');
-    let output = document.querySelector('.section-output');
+///////////////////////////
+/////// Version 0.1.2 /////
+//////////////////////////
 
-    output.addEventListener('keyup', (event) => {
-        if (event.key == "Enter") {
-            outputData()
+function App() {
+    if (localStorage.getItem('city')) {
+        let city = localStorage.getItem('city');
+        weather.getData(city)
+            .then(data => {
+                let { main } = data;
+                page.controlButton();
+                page.createInfoPage(city, main)
+            })
+    }
+    else {
+        page.createHelloPage();
+        function control() {
+            let btn = document.querySelector('.helloPage__btn'),
+                city;
+
+            btn.addEventListener('click', () => {
+                city = document.querySelector('.helloPage__input input').value,
+                    weather.getData(city)
+                        .then(data => {
+                            if (data.cod !== 200) {
+                                page.animate("oops");
+                            }
+                            else {
+                                let { main } = data;
+                                page.animate("workspaceRemove");
+                                page.animate('info', city, main);
+                                page.controlButton();
+                                localStorage.setItem('city', city)
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+            })
+            document.addEventListener('keyup', (event) => {
+                city = document.querySelector('.helloPage__input input').value;
+                if (event.key == "Enter") {
+                    weather.getData(city)
+                        .then(data => {
+                            if (data.cod !== 200) {
+                                page.animate("oops");
+                            }
+                            else {
+                                let { main } = data;
+                                page.animate("workspaceRemove");
+                                page.animate('info', city, main);
+                                page.controlButton();
+                                localStorage.setItem('city', city)
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                }
+            })
         }
-
-    })
-    btn.addEventListener('click', outputData)
+        control()
+    }
+    version.display("0.1.2")
 }
-controlBtn()
 
+App()
 
 
 
