@@ -76,7 +76,7 @@ class ControlPages {
         container.appendChild(block);
     }
     animate(type, city, obj) {
-        if (type == "workspaceRemove") {
+        if (type === "workspaceRemove") {
             let output = document.querySelector('.helloPage__output'),
                 logo = document.querySelector('.helloPage__logo'),
                 workspace = document.querySelector('.helloPage');
@@ -89,17 +89,14 @@ class ControlPages {
                 workspace.remove()
             }, 800)
         }
-        else if (type == "info") {
+        else if (type === "info") {
             if (city && obj) {
                 return setTimeout(() => {
                     this.createInfoPage(city, obj)
                 }, 800)
             }
-            else {
-                console.log('asd');
-            }
         }
-        else if (type == "oops") {
+        else if (type === "oops") {
             let output = document.querySelector('.helloPage__output');
             let btn = document.querySelector('.helloPage__btn');
             btn.style.borderLeft = "1px solid #EA6E4B";
