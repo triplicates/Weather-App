@@ -1,6 +1,6 @@
 # Weather-App
 
-See a work here: https://triplicates.github.io/Weather-App/
+See a work here: https://tripplicate.github.io/Weather-App/
 
 ### Description
 
